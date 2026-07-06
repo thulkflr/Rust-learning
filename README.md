@@ -60,6 +60,3 @@ Notes:
 
 This repository is for learning purposes. Add a license if you intend to share or publish the code.
 
----
-
-If you'd like, I can also add per-chapter READMEs, runnable examples, or short descriptions for each subproject — tell me which chapters to prioritize.
