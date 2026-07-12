@@ -178,7 +178,7 @@ fn main() {
     let s3 = takes_and_gives_back(s2);  // s2 is moved into takes_and_gives_back, which also
                                         // moves its return value into s3
     println!("{s3}, world!"); //this line will not cause an error because s3 is still valid after the move. The ownership of the String value is transferred from the variable s2 to the function takes_and_gives_back, and then back to the variable s3. The
-        
+
 }
 fn takes_ownership(some_string: String) { // some_string comes into scope
     println!("{some_string}");
