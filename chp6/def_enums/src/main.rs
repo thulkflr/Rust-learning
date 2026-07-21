@@ -1,5 +1,5 @@
 //Enums and Patern Matching
-// Enums allow you to define a type by enumerating its possible variants.
+// Enums allow you to define a type by enumerating(تعداد) its possible variants.يعني بامكانا نعدد احتمالات المتغير الواحد
 // as we learned in Struct that is the way to group related fields together,
 // enums give us a way of saying a value is one of a possible set of values
 // for example we may want to say that rectangle is one of a set of possible shapes 
@@ -7,9 +7,9 @@
 // encode these posslibilities as an enum.
 
 // let s do an example to Proof that enums are better than STructs
-// Evrey one Knows that IP addresses are globaly known in two types
-//  V4 and IPV6, these are the possibilities of IP addresses so we enumerate all possible variants
-// evry IP address can be V4 or V6 not both at the same tine, 
+// Evreyone Knows that IP addresses are globaly known in two types
+// IPV4 and IPV6, these are the possibilities of IP addresses so we enumerate all possible variants
+// evry IP address can be V4 or V6 not both at the same time, 
 // That property of IP addresses makes the enum data structure appropriate because an enum value can only be one of its variants.
 
 // we can express this concept in code by Define this ENum:
@@ -40,7 +40,7 @@ struct ChangeColorMsg(i32,i32,i32);
 
 struct IpAddress{
     ip_type:IPAdressesVersions
- ,   address: String
+ ,  address: String
 }
 
 // we can implements the Enum Like struct:
@@ -67,9 +67,6 @@ enum Option<T>{//T is generic type parameter
     None,// There is No Nulls in RUst , None Means thats no data here and it also included in prelude
     Some(T), // there is data stores in Some(T) and it also included in prelude
 }
-// <T> means that the Some variant of the Option enum can hold one piece of data of any type, and that each concrete type that gets used in place of T makes the overall Option<T> type a different type. Here are some examples of using Option values to hold number types and char types:
-
-
 
 fn main() {
 // we can use Enums Like this:
@@ -87,7 +84,8 @@ let home = IpAddress{
 println!("{IPV4}");
 
 
-
+// <T> means that the Some variant of the Option enum can hold one piece of data of any type, and that each concrete type that gets
+// used in place of T makes the overall Option<T> type a different type. Here are some examples of using Option values to hold number types and char types:
 let someNumber = Option::Some(5);
 let someNumberSome = Some(5);//are the same because Some included in the prelude
 

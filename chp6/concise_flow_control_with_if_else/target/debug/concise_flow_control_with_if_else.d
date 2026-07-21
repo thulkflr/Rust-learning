@@ -1,0 +1,1 @@
+/home/thu-alkfl/Desktop/RustLearning/chp6/concise_flow_control_with_if_else/target/debug/concise_flow_control_with_if_else: /home/thu-alkfl/Desktop/RustLearning/chp6/concise_flow_control_with_if_else/src/main.rs
