@@ -14,7 +14,7 @@ mod tests {
 }
 
 
-// we are in a crate root
+// we are in a crate root and its library crate
 // lets create a mods of resturant 
 // each mod can have multiple mods, structs or funcstions
 mod front_of_house{
@@ -41,6 +41,7 @@ mod back_of_house{
     fn fix_incorrect_order() {
         cook_order();
         super::deliver_order(); // "super" here is the parent mod "back_of_house"
+        // dbg!(super);
     }
 
     fn cook_order() {}

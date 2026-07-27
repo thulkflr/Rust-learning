@@ -17,6 +17,8 @@ there is two types of Paths and it separates by (::)
     assume we are in or at front_of_house Module: 
     the relative path will be like this:
     front_of_house::hosting::add_to_wishlist();
+
+
         crate::front_of_house::hosting::add_to_waitlist();// abs paht
            --> src/lib.rs:37:28
             |
@@ -31,13 +33,13 @@ there is two types of Paths and it separates by (::)
         So, what happens if we add pub to hosting module?
         Oops! another Error!:
         |
-        37 |     crate::front_of_house::hosting::add_to_waitlist();// abs paht
+     37 |     crate::front_of_house::hosting::add_to_waitlist();// abs paht
         |                                     ^^^^^^^^^^^^^^^ private function
         |
         note: the function `add_to_waitlist` is defined here
         --> src/lib.rs:22:5
         |
-        22 |     fn add_to_waitlist() {}
+     22 |     fn add_to_waitlist() {}
         |     ^^^^^^^^^^^^^^^^^^^^
 
         For more information about this error, try `rustc --explain E0603`
@@ -58,7 +60,9 @@ LETS START WITH RELATIVE PATHS USING super:
     mod back_of_house {
         fn fix_incorrect_order() {
             cook_order();
-            super::deliver_order(); //we can start the path with super thats mean we start the path from parent 
+            super::deliver_order(); //we can start the path with super thats means we start the path from parent 
+            // super --> (..) which means the parent of back_of_house let say its the crate or another Parent Module,
+            // and this parent thing has our function deliver_order its seems to this (..)::deliver_order()
         }
 
         fn cook_order() {}
@@ -66,7 +70,7 @@ LETS START WITH RELATIVE PATHS USING super:
 
     super here same to ".."
 
-
+------------------------------------------------------------------------
 pub keyword WITH Structs AND Enums:
 
 1. if we add pub kw with struct thats make the struct public but the fields of struct still private
@@ -108,3 +112,66 @@ pub fn eat_at_restaurant() {
     let order1 = back_of_house::Appetizer::Soup;
     let order2 = back_of_house::Appetizer::Salad;
 }
+
+
+-----------------------------------------------------------------------
+Start with 7.4 section: Bringing Paths into Scope with the use Keyword
+Instead of write the path of element when we need it evreywhere we ganna use the use Keyword once at time only
+mod front_of_house
+{
+    pop mod hosting{
+        pub fn add_to_wishlist();
+    }
+}
+use crate::front_of_house::hosting;
+
+pub fn eatAtResturant(){
+    hosting::add_to_wishlist();
+
+}
+
+mod customer {
+    pub fn eat_at_restaurant() {
+        hosting::add_to_waitlist();// it will show an error because we are in child module and we are out of range of the parant module
+|       ^^^^^^^ use of unresolved module or unlinked crate `hosting`
+warning: unused import: `crate::front_of_house::hosting` //its unused because there is no useage of this path in parent module
+ --> src/lib.rs:7:5
+    |
+124 | use crate::front_of_house::hosting;
+    |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |
+    = note: `#[warn(unused_imports)]` on by default
+    }// to fix that we can add super:: to access on parent and use the path
+}
+
+-----------------------------------------------------
+Idiomatic use Paths
+why we cant call  the only add_to_waitlist instead of using hosting::add_to_waitlist();?
+like this:
+ pub fn eat_at_restaurant() {
+    add_to_waitlist();
+} we need to call the Idiomatic use
+use crate::front_of_house::hosting::add_to_waitlist;
+thats will work
+ ***  assume we have two modules or elenments in module or somting with the same name and we need to 
+ use them in the same module, Like this:
+ use crate::sami::somthing::Result;
+ use mohammad::hello::Result;
+
+ Rust will prevent the code for work, the solution of this problem
+ is using "as" key word, like this:
+ use crate::sami::somthing::Result;
+ use mohammad::hello::Result as IoResult;
+
+fn function1() -> Result {
+    // --snip--
+}
+
+fn function2() -> IoResult<()> {
+    // --snip-- 
+}
+
+
+-------------------------------------------------------
+Re-exporting
+
