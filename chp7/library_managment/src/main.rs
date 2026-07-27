@@ -12,3 +12,6 @@ let name= membership::User::new("ahmad",1);
 dbg!(&name.userName);
 // user.id=5;
 }
+
+
+// for more information follow this link https://share.gemini.google/EXfBdGVLUJsH
